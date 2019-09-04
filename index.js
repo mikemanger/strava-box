@@ -49,7 +49,7 @@ async function updateGist(data) {
     Swimming: {
       key: "ytd_swim_totals"
     },
-    Biking: {
+    Cycling: {
       key: "ytd_ride_totals"
     }
   };
