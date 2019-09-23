@@ -175,13 +175,14 @@ function generateBarChart(percent, size) {
 }
 
 function formatDistance(distance) {
+  const trimmedDistance = parseFloat(distance / 1000).toFixed(2);
   switch (units) {
     case "meters":
-      return `${metersToKm(distance)} km`;
+      return `${trimmedDistance} km`;
     case "miles":
       return `${metersToMiles(distance)} mi`;
     default:
-      return `${metersToKm(distance)} km`;
+      return `${trimmedDistance} km`;
   }
 }
 
