@@ -103,16 +103,6 @@ async function updateGist(data) {
   let totalDistance = 0;
 
   const lines = Object.keys(keyMappings)
-    .filter(activityType => {
-      // Only show activies with a distance set
-      const { key } = keyMappings[activityType];
-      try {
-        const { distance, moving_time } = data[key];
-      } catch (error) {
-        return false;
-      }
-      return distance > 0;
-    })
     .map(activityType => {
       // Store the activity name and distance
       const { key } = keyMappings[activityType];
@@ -132,6 +122,10 @@ async function updateGist(data) {
           distance: 0
         };
       }
+    })
+    .filter(activity => {
+      // Only show activies with a distance set
+      return activity["distance"] > 0;
     })
     .map(activity => {
       // Calculate the percentages and bar charts for the 3 activities
