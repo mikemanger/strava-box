@@ -104,11 +104,23 @@ async function updateGist(data) {
 
   let totalDistance = 0;
 
-  const lines = Object.keys(keyMappings).map(activityType => {
+  const lines = Object.keys(keyMappings).filter(activity => {
+    // Only show activies with a distance set
+    const { key } = keyMappings[activity];
+    try {
+      const { distance, moving_time } = data[key];
+    } catch (error) {
+      return false;
+    }
+    return distance > 0;
+  }).map(activityType => {
     // Store the activity name and distance
     const { key } = keyMappings[activityType];
     try {
       const { distance, moving_time } = data[key];
+      if ( distance == 0 ) {
+        return;
+      }
       totalDistance += distance;
       return {
         name: activityType,
